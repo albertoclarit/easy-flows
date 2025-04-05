@@ -34,10 +34,10 @@ import org.jeasy.flows.work.WorkContext;
 import org.jeasy.flows.work.WorkReport;
 import org.jeasy.flows.work.WorkStatus;
 import org.jeasy.flows.workflow.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import static org.assertj.core.api.Assertions.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.jeasy.flows.engine.WorkFlowEngineBuilder.aNewWorkFlowEngine;
 import static org.jeasy.flows.work.WorkReportPredicate.COMPLETED;
 import static org.jeasy.flows.workflow.ConditionalFlow.Builder.aNewConditionalFlow;

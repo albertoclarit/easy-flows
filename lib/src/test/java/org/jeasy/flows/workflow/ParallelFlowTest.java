@@ -23,15 +23,13 @@
  */
 package org.jeasy.flows.workflow;
 
-import org.assertj.core.api.Assertions;
 import org.jeasy.flows.work.Work;
 import org.jeasy.flows.work.WorkContext;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import java.util.Arrays;
 import java.util.List;
-
+import static org.assertj.core.api.Assertions.*;
 public class ParallelFlowTest {
 
     @Test
@@ -48,7 +46,7 @@ public class ParallelFlowTest {
         ParallelFlowReport parallelFlowReport = parallelFlow.execute(workContext);
 
         // then
-        Assertions.assertThat(parallelFlowReport).isNotNull();
+        assertThat(parallelFlowReport).isNotNull();
         Mockito.verify(parallelFlowExecutor).executeInParallel(works, workContext);
     }
 

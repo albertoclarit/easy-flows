@@ -26,8 +26,9 @@ package org.jeasy.flows.workflow;
 import org.jeasy.flows.work.Work;
 import org.jeasy.flows.work.WorkContext;
 import org.jeasy.flows.work.WorkReportPredicate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import static org.assertj.core.api.Assertions.*;
 
 public class ConditionalFlowTest {
 

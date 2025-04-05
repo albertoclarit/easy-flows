@@ -29,7 +29,8 @@ import org.jeasy.flows.work.Work;
 import org.jeasy.flows.work.WorkContext;
 import org.jeasy.flows.work.WorkReport;
 import org.jeasy.flows.work.WorkStatus;
-import org.junit.Test;
+import org.junit.jupiter.api.Test; 
+import static org.assertj.core.api.Assertions.*;
 import org.mockito.Mockito;
 
 import java.util.Arrays;
@@ -54,9 +55,9 @@ public class ParallelFlowExecutorTest {
         executorService.shutdown();
 
         // then
-        Assertions.assertThat(workReports).hasSize(2);
-        Assertions.assertThat(work1.isExecuted()).isTrue();
-        Assertions.assertThat(work2.isExecuted()).isTrue();
+        assertThat(workReports).hasSize(2);
+        assertThat(work1.isExecuted()).isTrue();
+        assertThat(work2.isExecuted()).isTrue();
     }
 
     static class HelloWorldWork implements Work {

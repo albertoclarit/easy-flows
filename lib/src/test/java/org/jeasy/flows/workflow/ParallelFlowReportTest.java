@@ -23,47 +23,38 @@
  */
 package org.jeasy.flows.workflow;
 
-import org.jeasy.flows.work.Work;
+import org.jeasy.flows.work.DefaultWorkReport;
 import org.jeasy.flows.work.WorkContext;
-import org.jeasy.flows.work.WorkReportPredicate;
-import org.junit.Test;
-import org.mockito.Mockito;
+import org.jeasy.flows.work.WorkStatus;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test; 
+import static org.assertj.core.api.Assertions.*;
+public class ParallelFlowReportTest {
 
-public class RepeatFlowTest {
+	private Exception exception;
+	private ParallelFlowReport parallelFlowReport;
 
-    @Test
-    public void testRepeatUntil() {
-        // given
-        Work work = Mockito.mock(Work.class);
-        WorkContext workContext = Mockito.mock(WorkContext.class);
-        WorkReportPredicate predicate = WorkReportPredicate.ALWAYS_FALSE;
-        RepeatFlow repeatFlow = RepeatFlow.Builder.aNewRepeatFlow()
-                .repeat(work)
-                .until(predicate)
-                .build();
+	@BeforeEach
+	public void setUp() {
+		exception = new Exception("test exception");
+		WorkContext workContext = new WorkContext();
+		parallelFlowReport = new ParallelFlowReport();
+		parallelFlowReport.add(new DefaultWorkReport(WorkStatus.FAILED, workContext, exception));
+		parallelFlowReport.add(new DefaultWorkReport(WorkStatus.COMPLETED, workContext));
+	}
 
-        // when
-        repeatFlow.execute(workContext);
+	@Test
+	public void testGetStatus() {
+		assertThat(parallelFlowReport.getStatus()).isEqualTo(WorkStatus.FAILED);
+	}
 
-        // then
-        Mockito.verify(work, Mockito.times(1)).execute(workContext);
-    }
+	@Test
+	public void testGetError() {
+		assertThat(parallelFlowReport.getError()).isEqualTo(exception);
+	}
 
-    @Test
-    public void testRepeatTimes() {
-        // given
-        Work work = Mockito.mock(Work.class);
-        WorkContext workContext = Mockito.mock(WorkContext.class);
-        RepeatFlow repeatFlow = RepeatFlow.Builder.aNewRepeatFlow()
-                .repeat(work)
-                .times(3)
-                .build();
-
-        // when
-        repeatFlow.execute(workContext);
-
-        // then
-        Mockito.verify(work, Mockito.times(3)).execute(workContext);
-    }
-
+	@Test
+	public void testGetReports() {
+		assertThat(parallelFlowReport.getReports()).hasSize(2);
+	}
 }

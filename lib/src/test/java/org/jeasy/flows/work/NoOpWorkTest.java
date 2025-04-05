@@ -22,10 +22,11 @@
  *  THE SOFTWARE.
  */
 package org.jeasy.flows.work;
+ 
 
-import org.assertj.core.api.Assertions;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class NoOpWorkTest {
 
@@ -33,14 +34,14 @@ public class NoOpWorkTest {
 
 	@Test
 	public void getName() {
-		Assertions.assertThat(work.getName()).isNotNull();
+		assertThat(work.getName()).isNotNull();
 	}
 
 	@Test
 	public void testExecute() {
 		WorkReport workReport = work.execute(new WorkContext());
-		Assert.assertNotNull(workReport);
-		Assertions.assertThat(workReport.getStatus()).isEqualTo(WorkStatus.COMPLETED);
+		assertThat(workReport).isNotNull();
+		assertThat(workReport.getStatus()).isEqualTo(WorkStatus.COMPLETED);
 
 	}
 }

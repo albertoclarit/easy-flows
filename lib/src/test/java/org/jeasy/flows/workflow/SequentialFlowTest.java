@@ -28,9 +28,10 @@ import java.util.List;
 
 import org.jeasy.flows.work.Work;
 import org.jeasy.flows.work.WorkContext;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
+import static org.assertj.core.api.Assertions.*;
 
 public class SequentialFlowTest {
 
